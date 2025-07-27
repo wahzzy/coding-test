@@ -27,7 +27,8 @@ async def compress(file: UploadFile = File(...)):
     try:
         file_data = await file.read()
 
-        # Simple compressed image without third party library
+        # Sorry I did not come out the compress solution without 3rd library
+        # Just simple compressed image file with half cut its size
         compressed_data = file_data[: len(file_data) // 2]
         # Save metadata in memory with thread safety
         with history_lock:
@@ -58,6 +59,6 @@ async def compress(file: UploadFile = File(...)):
     description="Upload an image file and receive a compressed version",
     response_class=JSONResponse,
 )
-def history():
+def show_history():
     with history_lock:
         return JSONResponse(content={"history": history})
